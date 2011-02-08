@@ -18,16 +18,11 @@
    Given only sheet and row number n, returns the rows starting at
    column 0. "
   ([^Sheet sheet n start]
-     (take-while
-      (partial not= "")
-      (map #(.. sheet
-                (getCell % n)
-                getContents)
-           (iterate inc start))))
+     (->> (iterate inc start)
+          (map #(.. sheet (getCell % n) getContents))
+          (take-while (partial not= ""))))
   ([sheet n]
      (get-row sheet n 0)))
 
 (defn -main [& args]
   (println "Yo, boat here!"))
-
-
