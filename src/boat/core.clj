@@ -38,7 +38,7 @@
   [f]
   (let [csv-reader (CsvListReader. (reader f)
                                    CsvPreference/STANDARD_PREFERENCE)]
-    (map vec (take-while (partial not= nil)
+    (map vec (take-while (complement nil?)
                          (repeatedly #(.read csv-reader))))))
 
 (defn convert-line [kmap line]
